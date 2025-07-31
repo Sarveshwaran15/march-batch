@@ -1,0 +1,23 @@
+public class Zoho_question4 {
+    public static void main(String[] args) {
+        //correct spelling
+        String actualSpelling="rahul";
+        String typedSpelling="rrahul";
+        System.out.println("result : "+validate(actualSpelling,typedSpelling));
+    }
+    static boolean validate(String actualSpelling,String typedSpelling)
+    {
+        int i = 0, j = 0;
+        while (j < typedSpelling.length()) {
+            if (i < actualSpelling.length() && actualSpelling.charAt(i) == typedSpelling.charAt(j)) {
+                i++;
+                j++;
+            } else if (j > 0 && typedSpelling.charAt(j) == typedSpelling.charAt(j - 1)) {
+                j++;
+            } else {
+                return false;
+            }
+        }
+        return i == actualSpelling.length();
+    }
+}
