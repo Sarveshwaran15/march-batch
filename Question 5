@@ -1,0 +1,42 @@
+public class Zoho_question {
+    public static void main(String[] args) {
+        String input = "3[a2[c2[de]]]";
+        System.out.println("output :"+fun(input));
+    }
+    static String fun(String word)
+    {
+        return helperFunction(word.toCharArray(),new int[]{0});
+    }
+    static String helperFunction(char[] chars,int[] pointer)
+    {
+        StringBuilder word=new StringBuilder();
+        int num=0;
+        while(pointer[0]<chars.length)
+        {
+            char ch=chars[pointer[0]];
+            if(Character.isDigit(ch))
+            {
+                num=num*10+(ch-'0');
+                pointer[0]++;
+            }
+            else if (ch == '[') {
+                pointer[0]++;
+                String nestedWord = helperFunction(chars, pointer);
+                for (int i = 0; i < num; i++) {
+                    word.append(nestedWord);
+                }
+                num = 0;
+            }
+            else if(ch==']')
+            {
+                pointer[0]++;
+                return word.toString();
+            }
+            else{
+                word.append(ch);
+                pointer[0]++;
+            }
+        }
+        return  word.toString();
+    }
+}
